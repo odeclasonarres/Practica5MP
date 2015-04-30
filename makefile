@@ -5,21 +5,25 @@ OBJ=./obj/
 LIB=./lib/
 OPC=-Wall -g
 ZIP=./zip/
-PRJ=practica3
+PRJ=practica4
 
 CXX = g++
 CPPFLAGS = -Wall -g -c -I$(INC)
 
 
-#all: $(BIN)/esteganografia $(BIN)/testcodificar $(BIN)/testimagen
-all: $(BIN)testimagen $(BIN)testcodificar
+all: $(BIN)esteganografia $(BIN)testcodificar $(BIN)testimagen 
 
-$(BIN)testcodificar: $(OBJ)testcodificar.o $(LIB)libimagen.a $(OBJ)codificar.o $(OBJ)byte.o
-	g++ $(OBJ)testcodificar.o $(OBJ)codificar.o $(OBJ)byte.o -limagen -o $(BIN)testcodificar -L$(LIB)
+$(BIN)esteganografia: $(OBJ)esteganografia.o $(LIB)libimagen.a 
+	g++ $(OBJ)esteganografia.o -limagen -o $(BIN)esteganografia -L$(LIB)
+
+$(BIN)testcodificar: $(OBJ)testcodificar.o $(LIB)libimagen.a 
+	g++ $(OBJ)testcodificar.o -limagen -o $(BIN)testcodificar -L$(LIB)
 
 $(BIN)testimagen: $(OBJ)testimagen.o $(LIB)libimagen.a
 	g++ $(OBJ)testimagen.o  -limagen -o $(BIN)testimagen -L$(LIB)
 
+$(OBJ)esteganografia.o: $(SRC)esteganografia.cpp 
+	g++ $(OPC) -c $(SRC)esteganografia.cpp -o $(OBJ)esteganografia.o -I$(INC)
 
 $(OBJ)testcodificar.o: $(SRC)testcodificar.cpp 
 	g++ $(OPC) -c $(SRC)testcodificar.cpp -o $(OBJ)testcodificar.o -I$(INC)
@@ -27,8 +31,8 @@ $(OBJ)testcodificar.o: $(SRC)testcodificar.cpp
 $(OBJ)testimagen.o: $(SRC)testimagen.cpp 
 	g++ $(OPC) -c $(SRC)testimagen.cpp -o $(OBJ)testimagen.o -I$(INC)
 
-$(LIB)libimagen.a: $(OBJ)imagen.o $(OBJ)pgm.o
-	ar rvs $(LIB)libimagen.a $(OBJ)imagen.o $(OBJ)pgm.o
+$(LIB)libimagen.a: $(OBJ)imagen.o $(OBJ)pgm.o $(OBJ)byte.o $(OBJ)codificar.o
+	ar rvs $(LIB)libimagen.a $(OBJ)imagen.o $(OBJ)pgm.o $(OBJ)byte.o $(OBJ)codificar.o
 
 $(OBJ)imagen.o: $(SRC)imagen.cpp 
 	g++ $(OPC) -c $(SRC)imagen.cpp -o $(OBJ)imagen.o -I$(INC)

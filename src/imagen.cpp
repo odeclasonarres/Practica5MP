@@ -16,10 +16,16 @@ Imagen::Imagen(int filas, int columnas){
 
 void Imagen::crear(int filas, int columnas){
 
-	if((filas * columnas) <= MAXPIXELS){
+	int tamagno =  filas * columnas;
+	if(datos != 0){
+		delete [] datos;
+	}
+
+	if(tamagno > 0){
 		nfilas =  filas;
 		ncolumnas =  columnas;
-		for(int i = 0; i < MAXPIXELS; i++){
+		datos =  new byte[tamagno];
+		for(int i = 0; i < tamagno; i++){
 			datos[i] = 0;
 		}
 	}else{
@@ -27,7 +33,6 @@ void Imagen::crear(int filas, int columnas){
 		ncolumnas = 0;
 	}
 }
-   
 
 int Imagen::filas(){
 	return nfilas;
@@ -82,6 +87,8 @@ bool Imagen::leerImagen(const char nombreFichero[]){
 		return false;
 	}else if(tipo ==  IMG_PGM_BINARIO){
 		return leerPGMBinario (nombreFichero, datos,nfilas, ncolumnas);
+	}else if(tipo == IMG_PGM_TEXTO){
+		return leerPGMTexto (nombreFichero, datos, nfilas, ncolumnas);
 	}
 	return false;
 
@@ -89,7 +96,7 @@ bool Imagen::leerImagen(const char nombreFichero[]){
    
 
 bool Imagen::escribirImagen(const char nombreFichero[]){
-	return escribirPGMBinario (nombreFichero, datos, nfilas, ncolumnas);
+	return escribirPGMBTexto (nombreFichero, datos, nfilas, ncolumnas);
 
 }
 

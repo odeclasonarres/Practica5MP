@@ -5,9 +5,11 @@
   * Permite la E/S de archivos de tipos PGM
   *
   */
-
-#include <fstream>
+#include <iostream>
 #include <string>
+#include <stdlib.h> 
+#include <ostream>
+#include <fstream>
 #include "pgm.h"
 using namespace std;
 
@@ -107,6 +109,66 @@ bool escribirPGMBinario (const char nombre[], const unsigned char datos[], int f
     f << 255 << endl;
     f.write(reinterpret_cast<const char *>(datos),filas*columnas);
     if (!f) res=false;
+  }
+  return res;
+}
+
+// _____________________________________________________________________________
+
+bool leerPGMTexto (const char nombre[], unsigned char datos[], int& filas, int& columnas)
+{
+  bool exito= false;
+  filas=0;
+  columnas=0;
+  ifstream f(nombre);
+  
+  if (LeerTipo(f)==IMG_PGM_TEXTO)
+    if (LeerCabecera (f, filas, columnas)){
+		
+		if (f) {
+			string castingDato = "";
+			for(int i = 0; i < filas*columnas; i++){
+				f >> castingDato;
+				datos[i]=atoi(castingDato.c_str());
+			}
+			if (!f) {
+				exito= false;
+			}else{
+				exito= true;
+			}
+			f.close();
+		}else {
+			exito= false;
+		}
+	}
+  
+  return exito;
+}
+
+// _____________________________________________________________________________
+
+bool escribirPGMBTexto (const char nombre[], const unsigned char datos[], int filas, int columnas)
+{
+  ofstream f(nombre);
+  bool res= true;
+  
+  if (f) {
+	f << "P2" << endl;
+	f << columnas << ' ' << filas << endl;
+	f << 255 << endl;
+	if (f) {
+		for(int i = 0; i < filas*columnas; i++){
+			f << (int)datos[i] << " ";
+		}
+		if (!f) {
+			res= false;
+		}else{
+			res= true;
+		}
+		f.close();
+	}else {
+		res= false;
+	}
   }
   return res;
 }

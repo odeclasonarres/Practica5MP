@@ -31,7 +31,7 @@ int main(){
 	}
 	cout << endl;
 	
-	strcpy(mensaje, "E"); // El mensaje a ocultar
+	strcpy(mensaje, "X"); // El mensaje a ocultar
 	
 	cout << "Voy a ocultar la cadena '" << mensaje << "' y el '\\0' en la imagen\n";
 	cout << "La cadena tiene " << (strlen(mensaje)+1)*8 << " bits que son:\n";
@@ -40,7 +40,7 @@ int main(){
 	}
 	cout << endl;
 	
-	if (!ocultar(&img, mensaje)){
+	if (!ocultar(img, mensaje)){
 		cout << "Error: El mensaje es muy largo para ocultarlo en la imagen\n";
 		return 1;
 	}
@@ -48,7 +48,7 @@ int main(){
 	cout << "La imagen después de ocultar tiene los siguientes valores\n";
 	for (int y=0; y < img.filas(); y++){
 		for (int x=0; x < img.columnas(); x++){
-			cout << (char)(img.get(y, x)) << " ";
+			cout << (img.get(y, x)) << " ";
 		}
 		cout << endl;
 	}
@@ -62,7 +62,6 @@ int main(){
 	print(mensaje[1]);
 	cout << endl;	
 
-	/*
 	if (!revelar(img, mensaje, MAXTAM)){
 		cout << "Error: La imagen no contiene un mensaje o el mensaje es demasiado largo\n";
 		return 1;
@@ -79,6 +78,6 @@ int main(){
 		cout << "Error: El mensaje es muy largo para ocultarlo en la imagen\n";
 		return 1;
 	}
-	*/
+	
 	return 0;
 }

@@ -65,5 +65,36 @@ bool leerPGMBinario (const char nombre[], unsigned char datos[], int& filas, int
   */
 bool escribirPGMBinario (const char nombre[], const unsigned char datos[], int filas, int columnas);
 
+
+/**
+  * @brief Lee una imagen de tipo PGM texto
+  *
+  * @param nombre 	nombre del archivo a leer
+  * @param filas 	Parámetro de salida con las filas de la imagen.
+  * @param columnas Parámetro de salida con las columnas de la imagen.
+  * @param datos 	vector para obtener el valor de cada uno de los píxeles
+  *        desde la esquina superior izqda a la inferior dcha. 
+  * @retval true 	si ha tenido éxito en la lectura.
+  * @retval false 	si se ha producido algún error en la lectura.
+  * @pre datos 		debe tener tamaño suficiente para almacenar
+  *      @a filas x @a columnas bytes de datos de la imagen.
+  */
+bool leerPGMTexto (const char nombre[], unsigned char datos[], int& filas, int& columnas);
+
+/**
+  * @brief Escribe una imagen de tipo PGM texto
+  *
+  * @param nombre 	nombre del archivo a escribir
+  * @param datos 	vector con @a filas x @a columnas bytes que corresponden
+  *       a los valores de los píxeles de la imagen de grises.
+  * @param filas 	número de filas de la imagen
+  * @param columnas	número de columnas de la imagen
+  * @retval true 	si ha tenido éxito en la escritura.
+  * @retval false 	si se ha producido algún error en la escritura.
+  */
+bool escribirPGMBTexto (const char nombre[], const unsigned char datos[], int filas, int columnas);
+
+
+
 #endif
 

@@ -3,5 +3,6 @@
 @brief Funciones Codificar.
 */
 
-bool ocultar (Imagen *img, char mensaje[]);
+bool ocultar (Imagen &, char mensaje[]);
 
+bool revelar (Imagen &, char mensaje[],int MAXTAM);
