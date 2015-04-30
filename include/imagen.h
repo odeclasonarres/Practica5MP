@@ -14,8 +14,7 @@ typedef unsigned char byte; ///< byte = 8bits almacenado en un unsigned char
 */
 class Imagen{
 private:
-   static const int MAXPIXELS = 1000000;  ///< número máximo de píxeles que podemos almacenar 
-   byte datos[MAXPIXELS];///< datos de la imagen
+   byte *datos ;///< datos de la imagen
    int nfilas; 			///< número de filas de la imagen
    int ncolumnas;		///< número de columnsa de la imagen
 public:
@@ -29,7 +28,7 @@ public:
 @param columnas	número de columnas de la imagen
 
 Construye una imagen de tamaño @a filas x @a columnas y pone todos 
-sus elementos a 0.
+sus elementos a 0. Reserva la memoria necesaria para almacenar la imagen.
 */
    Imagen(int filas, int columnas);
    
@@ -40,10 +39,14 @@ sus elementos a 0.
 @param columnas	número de columnas de la imagen
 
 Dimensiona la imagen a tamaño @a filas x @a columnas y pone todos 
-sus elementos a 0.
+sus elementos a 0. Reserva la memoria necesaria para almacenar la imagen.
 */
    void crear(int filas, int columnas);
    
+/**
+@brief Libera la memoria que pudiese estar utilizando la imagen
+*/ 
+   void destruir();
    
 /**
 @brief Devuelve el número de filas de las imagen
@@ -114,7 +117,7 @@ fila y @c x representa la columna.
 @retval true 	si ha tenido éxito en la lectura
 @retval false 	si se ha producido algún error en la lectura
 
-Lee desde disco los datos de la imagen llamada @a nombreFichero y la guarda en la memoria. La función debe asegurarse de que la imagen es de un tipo de imagen conocido y de que su tamaño es menor del tamaño máximo permitido (@c MAXDATOS)
+Lee desde disco los datos de la imagen llamada @a nombreFichero y la guarda en la memoria. La función debe asegurarse de que la imagen es de un tipo de imagen conocido y de reservar la memoria necesaria para almacenar la imagen.
 */
    bool leerImagen(const char nombreFichero[]);
    
@@ -125,7 +128,22 @@ Lee desde disco los datos de la imagen llamada @a nombreFichero y la guarda en l
 @retval true 	si ha tenido éxito en la escritura
 @retval false 	si se ha producido algún error en la escritura
 */
-   bool escribirImagen(const char nombreFichero[]); 
+   bool escribirImagen(const char nombreFichero[]);    
+
+/**
+@brief Rota una imagen en sentido horario 90 grados
+*/
+   void rotar();    
+   
+
+/**
+@brief Rota una imagen en múltiplos de 90 grados
+@param grados en múltiplos de 90 (90,180,270)
+@param sentidoHorario Sentido en que se realizará la rotación: true (sentido horario) o false (sentido contraorario)
+*/
+   void rotacion(int grados, bool sentidoHorario);    
+   
+   
 };
 
-#endif
+#endif 
