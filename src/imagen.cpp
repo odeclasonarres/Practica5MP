@@ -63,7 +63,7 @@ byte Imagen::get(int y, int x){
    
    
 void Imagen::setPos(int i, byte v){
-	if(i >= 0 && i < MAXPIXELS){
+	if(i >= 0 && i < (ncolumnas * nfilas)){
 		datos[i] = v;
 	}
 }
@@ -71,7 +71,7 @@ void Imagen::setPos(int i, byte v){
  
 byte Imagen::getPos(int i){
 
-	if(i >= 0 && i < MAXPIXELS){
+	if(i >= 0 && i < (ncolumnas * nfilas)){
 		return datos[i];
 	}else{
 		return 0;
@@ -83,9 +83,7 @@ byte Imagen::getPos(int i){
 bool Imagen::leerImagen(const char nombreFichero[]){
 
 	TipoImagen tipo =  infoPGM(nombreFichero, nfilas, ncolumnas);
-	if((nfilas * ncolumnas) > MAXPIXELS){
-		return false;
-	}else if(tipo ==  IMG_PGM_BINARIO){
+	if(tipo ==  IMG_PGM_BINARIO){
 		return leerPGMBinario (nombreFichero, datos,nfilas, ncolumnas);
 	}else if(tipo == IMG_PGM_TEXTO){
 		return leerPGMTexto (nombreFichero, datos, nfilas, ncolumnas);
