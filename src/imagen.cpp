@@ -8,6 +8,7 @@ using namespace std;
 Imagen::Imagen(){
 	nfilas = 0;
 	ncolumnas = 0;
+	datos = 0;
 }
 
 Imagen::Imagen(int filas, int columnas){
@@ -18,6 +19,7 @@ void Imagen::crear(int filas, int columnas){
 
 	int tamagno =  filas * columnas;
 	if(datos != 0){
+		
 		delete [] datos;
 	}
 
@@ -31,6 +33,7 @@ void Imagen::crear(int filas, int columnas){
 	}else{
 		nfilas = 0;
 		ncolumnas = 0;
+		datos = 0;
 	}
 }
 
@@ -81,8 +84,9 @@ byte Imagen::getPos(int i){
 
    
 bool Imagen::leerImagen(const char nombreFichero[]){
-
+	
 	TipoImagen tipo =  infoPGM(nombreFichero, nfilas, ncolumnas);
+	crear(nfilas, ncolumnas);
 	if(tipo ==  IMG_PGM_BINARIO){
 		return leerPGMBinario (nombreFichero, datos,nfilas, ncolumnas);
 	}else if(tipo == IMG_PGM_TEXTO){
