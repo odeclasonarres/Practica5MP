@@ -37,6 +37,16 @@ void Imagen::crear(int filas, int columnas){
 	}
 }
 
+void Imagen::destruir(){
+	if(datos != 0){
+		
+		delete [] datos;
+	}
+	nfilas = 0;
+	ncolumnas = 0;
+
+}
+
 int Imagen::filas(){
 	return nfilas;
 }
@@ -99,6 +109,25 @@ bool Imagen::leerImagen(const char nombreFichero[]){
 
 bool Imagen::escribirImagen(const char nombreFichero[]){
 	return escribirPGMBTexto (nombreFichero, datos, nfilas, ncolumnas);
+
+}
+
+void Imagen::rotar(){
+
+	byte* aux =  new byte[ncolumnas * nfilas];
+	int tamagno = ncolumnas * nfilas;
+	for(int y = 0; y < nfilas; y++){
+		for(int x = 0; x < ncolumnas; x++){
+			aux[x + nfilas * y] = get(x,y);//(x,y) x columnas //y filas
+		}
+	}
+	datos = aux;
+
+	delete [] aux;
+}
+
+void Imagen::rotacion(int grados, bool sentidoHorario){
+
 
 }
 

@@ -16,20 +16,22 @@ using namespace std;
 int main(){
 	int op=0;
 	string strOp = "";
+
+	string entrada="", salida="";
+	Imagen img;
 	do{
 		do{
 			cout << endl;
 			cout<<"1.Ocultar"<<endl;
 			cout<<"2.Revelar"<<endl;
-			cout<<"3.Salir"<<endl;
+			cout<<"3.Rotar"<<endl;
+			cout<<"4.Salir"<<endl;
 			cout<<"Seleccione una opción: ";
 			cin>>strOp;
 			op = atoi(strOp.c_str());
 			
-		}while(op!=1 && op!=2 && op!=3);
-
-		string entrada="", salida="";
-		Imagen img;
+		}while(op!=1 && op!=2 && op!=3 && op!=4);
+		
 		switch(op){
 			case 1:{
 				cout<<"Introduzca la imagen de entrada: "; 
@@ -91,11 +93,34 @@ int main(){
 			}
 
 			case 3:{
+				cout<<"Introduzca la imagen de entrada: "; 
+				cin>>entrada;
+		
+				if (!img.leerImagen(entrada.c_str())){
+					cerr << "error leyendo " << entrada << endl << endl;
+				}else{
+					img.rotar();
+					cout <<"rotando..."<<endl;
+					if (img.escribirImagen(entrada.c_str())){
+						// si todo va bien
+						cout << salida<<" guardado correctamente \n";
+						cout << "usa: display "<<entrada<<" para ver el resultado\n";
+					} else { // si error
+						cerr << "Error guardando la imagen";
+					}				
+					
+				}
+				
+				break;
+			}
+
+			case 4:{
 				cout<<"Adios"<<endl;
-				exit(0);
 				break;
 			}
 		}
-	}while(op!=3);
+	}while(op!=4);
+	
+	img.destruir();
 
 }
