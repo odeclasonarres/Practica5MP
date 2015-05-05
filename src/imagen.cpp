@@ -38,10 +38,11 @@ void Imagen::crear(int filas, int columnas){
 }
 
 void Imagen::destruir(){
-	if(datos != 0){
 		
+	if(datos != NULL){
 		delete [] datos;
 	}
+	datos = 0;
 	nfilas = 0;
 	ncolumnas = 0;
 
@@ -66,7 +67,7 @@ void Imagen::set(int y, int x, byte v){
    
 byte Imagen::get(int y, int x){
 	
-	if(x >= 0 && y >= 0 && x<ncolumnas && y < nfilas){
+	if(x >= 0 && y >= 0 && x< ncolumnas && y < nfilas){
 		
 		return datos[ y * ncolumnas + x];
 	}else

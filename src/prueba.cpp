@@ -127,7 +127,6 @@ int main(){
 					}				
 					
 				}
-				
 				break;
 			}
 
@@ -138,6 +137,5 @@ int main(){
 		}
 	}while(op!=4);
 	
-	img.destruir();
 
 }
