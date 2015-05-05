@@ -128,7 +128,9 @@ void Imagen::rotar(){
 			}
 		}
 	}
-	
+	int numfil = nfilas;
+	nfilas = ncolumnas;
+	ncolumnas = numfil;
 	datos = aux;
 
 	delete [] aux;
