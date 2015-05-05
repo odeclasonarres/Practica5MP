@@ -14,9 +14,11 @@
 using namespace std;
 
 int main(){
-	int op=0;
+	int op=0, grados=0;
 	string strOp = "";
-
+	char sentido;
+	bool correcto=false;
+	
 	string entrada="", salida="";
 	Imagen img;
 	do{
@@ -99,7 +101,22 @@ int main(){
 				if (!img.leerImagen(entrada.c_str())){
 					cerr << "error leyendo " << entrada << endl << endl;
 				}else{
-					img.rotar();
+					cout<<"Introduzca los grados(90,180 o 270) a rotar: ";
+					cin>>grados;				
+					
+					do{
+						
+						cout<<"¿Quiere rotar siguiendo el sentido horario? s/n ";
+						cin>>sentido;
+						if(sentido=='s'||sentido=='n'||sentido=='N'||sentido=='S'){
+							correcto=true;
+						}
+					}while(correcto);
+					if(sentido=='s'||sentido=='S'){
+						img.rotacion(grados,true);
+					}else{
+						img.rotacion(grados,false);
+					}
 					cout <<"rotando..."<<endl;
 					if (img.escribirImagen(entrada.c_str())){
 						// si todo va bien

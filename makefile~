@@ -22,8 +22,8 @@ $(BIN)testcodificar: $(OBJ)testcodificar.o $(LIB)libimagen.a
 $(BIN)testimagen: $(OBJ)testimagen.o $(LIB)libimagen.a
 	g++ $(OBJ)testimagen.o  -limagen -o $(BIN)testimagen -L$(LIB)
 
-$(OBJ)prueba.o: $(SRC)prueba.cpp 
-	g++ $(OPC) -c $(SRC)prueba.cpp -o $(OBJ)prueba.o -I$(INC)
+$(OBJ)esteganografia.o: $(SRC)esteganografia.cpp 
+	g++ $(OPC) -c $(SRC)esteganografia.cpp -o $(OBJ)esteganografia.o -I$(INC)
 
 $(OBJ)testcodificar.o: $(SRC)testcodificar.cpp 
 	g++ $(OPC) -c $(SRC)testcodificar.cpp -o $(OBJ)testcodificar.o -I$(INC)
