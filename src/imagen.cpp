@@ -114,13 +114,20 @@ bool Imagen::escribirImagen(const char nombreFichero[]){
 
 void Imagen::rotar(){
 
-	byte* aux =  new byte[ncolumnas * nfilas];
 	int tamagno = ncolumnas * nfilas;
-	for(int y = 0; y < nfilas; y++){
-		for(int x = 0; x < ncolumnas; x++){
-			aux[x + nfilas * y] = get(x,y);//(x,y) x columnas //y filas
+	cout << tamagno << endl;
+	byte* aux =  new byte[tamagno];	
+	int indiceNuevo = tamagno-1;
+	
+	for(int y = nfilas-1; y >= 0; y--){
+		for(int x = 0; x <ncolumnas; x++){
+			if(indiceNuevo >= 0){
+				aux[indiceNuevo] = get(x,y);//(x,y) x columnas //y filas
+				indiceNuevo--;
+			}
 		}
 	}
+	
 	datos = aux;
 
 	delete [] aux;
